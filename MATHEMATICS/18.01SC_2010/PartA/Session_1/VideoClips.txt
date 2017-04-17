@@ -32,4 +32,18 @@ of f at x0 is the slope of the tangent line to y=f(x) at P.
 
 --------------
 
+Clip 3 -
 
+Q. How do we know which line is the tangent line?  
+A. Tangent line = Limit of Secant lines PQ as Q->P  (Q tends to P)
+
+
+
+--------------
+
+Clip 4 -
+
+
+--------------
+
+Clip 5 -
