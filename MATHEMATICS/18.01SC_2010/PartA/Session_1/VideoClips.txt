@@ -1,0 +1,35 @@
+Videos : Single Variable Calculus 18.01SC
+Clip 1 -
+
+UNIT 1: Differentiation
+
+A. What is a derivative?
+
+1. Geometric Interpretation
+2. Physical Interpretation
+3. Importance of Derivates to all measurements
+	(Science, Engineering, Economics, Poli Sci)
+
+B. How to differentiate any function you know. (d/dx)
+
+--------------
+Clip 2 -
+
+Geometric Interpretation of Differentation
+
+Find the tangent line to y=f(x)
+	@ P=(x0,y0)
+
+
+1. Graph Function, draw tangent line  (lol)
+
+A tangent line is y-y0 = m(x-x0)
+point y0=f(x0)
+slope m or f'(x0)  f prime of x zero
+
+Def'n  f'(x0), the derivative
+of f at x0 is the slope of the tangent line to y=f(x) at P.
+
+--------------
+
+
