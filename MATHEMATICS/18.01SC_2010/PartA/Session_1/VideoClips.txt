@@ -43,6 +43,9 @@ A. Tangent line = Limit of Secant lines PQ as Q->P  (Q tends to P)
 
 Clip 4 -
 
+Draws line PQ, and computes its slope. (m)
+Notation: for delta(f)/delta(x)
+
 
 --------------
 
