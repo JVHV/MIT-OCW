@@ -10,28 +10,36 @@ def getSavings( rate, salary ):
         savings = savings + gain + deposit
         if i % 6 == 0:
             deposit = deposit + (semi_annual_raise * deposit)
+    if DEBUG_MODE:
+        print goal, savings, rate
     return savings
     
 ### Main ###
+DEBUG_MODE = False
+
 
 low = 0
 high = 10000
+divisor = 10000.0
 ans = (low + high) / 2.0
 steps = 0
 target = 250000
 epsilon = 100
 annual_salary = float(input("Enter the starting salary: "))
 
+if getSavings( 1, annual_salary) > target:
+    while abs(float(getSavings((ans/divisor), annual_salary) - target)) > epsilon:
+        steps = steps + 1
+        if DEBUG_MODE:
+            print steps, "low =", low, " and high =", high, " and ans =", ans/divisor
+        if getSavings((ans/divisor), annual_salary) > target:
+            high = ans
+        else:
+            low = ans
 
-while abs(float(getSavings((ans/100.0), annual_salary) - target)) > epsilon:
-    steps = steps + 1
-    print steps, "low =", low, " and high =", high, " and ans =", ans
-    if getSavings((ans/100.0), annual_salary) > target:
-        high = ans
-    else:
-        low = ans
+        ans = (low + high) / 2.0
 
-    ans = (low + high) / 2.0
-
-print "Best rate is: ", ans/100.0
-print "Number of steps: ", steps
+    print "Best rate is: ", ans/divisor
+    print "Number of steps: ", steps
+else:
+    print "You cannot achieve your goals with that salary.  Have you considered skilling up with OpenCourseWare?"
