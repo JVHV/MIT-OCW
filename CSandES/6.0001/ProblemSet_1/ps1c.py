@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 def getSavings( rate, salary ):
     goal = 250000
     r = .04
