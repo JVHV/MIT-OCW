@@ -1,5 +1,5 @@
 # 6.0001/6.00 Problem Set 5 - RSS Feed Filter
-# Name:
+# Name:  Liam Luthor
 # Collaborators:
 # Time:
 
@@ -54,7 +54,32 @@ def process(url):
 
 # Problem 1
 
-# TODO: NewsStory
+class NewsStory():
+    # class wide variables
+
+    def __init__(self, guid, title, description, link, pubdate ):
+        self.guid = guid
+        self.title = title
+        self.description = description
+        self.link = link
+        self.pubdate = pubdate
+
+    def get_guid(self):
+        return self.guid
+
+    def get_title(self):
+        return self.title
+
+    def get_description(self):
+        return self.description
+
+    def get_link(self):
+        return self.link
+
+    def get_pubdate(self):
+        return self.pubdate
+
+
 
 
 #======================
@@ -75,12 +100,42 @@ class Trigger(object):
 # Problem 2
 # TODO: PhraseTrigger
 
+class PhraseTrigger(Trigger):
+    def __init__(self, search_phrase):
+        self.search_phrase = search_phrase.lower()
+
+    def is_phrase_in(self, text):
+        phrase = text.lower()
+        keyword = self.search_phrase
+        double_blank = "  "
+
+        for punc in string.punctuation:
+            phrase = phrase.replace(punc, " ")
+        phrase = ' '.join(phrase.split("  ")) + " "
+
+        for double_blank in phrase:
+            phrase = phrase.replace("  ", " ")
+
+        if keyword in phrase:
+            phrase_split_on_keyword = phrase.split(keyword + ' ')
+            if len(phrase_split_on_keyword) < 2:
+                return False
+
+        return keyword in phrase
+
 # Problem 3
 # TODO: TitleTrigger
+
+class TitleTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_title())
 
 # Problem 4
 # TODO: DescriptionTrigger
 
+class DescriptionTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_description())
 # TIME TRIGGERS
 
 # Problem 5
@@ -89,9 +144,16 @@ class Trigger(object):
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
 
+class TimeTrigger(Trigger):
+    pass
 # Problem 6
 # TODO: BeforeTrigger and AfterTrigger
 
+class BeforeTrigger(Trigger):
+    pass
+
+class AfterTrigger(Trigger):
+    pass
 
 # COMPOSITE TRIGGERS
 
