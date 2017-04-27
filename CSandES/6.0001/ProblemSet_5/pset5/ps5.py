@@ -9,7 +9,7 @@ import time
 import threading
 from project_util import translate_html
 from mtTkinter import *
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 
@@ -145,27 +145,53 @@ class DescriptionTrigger(PhraseTrigger):
 #        Convert time from string to a datetime before saving it as an attribute.
 
 class TimeTrigger(Trigger):
-    pass
+    def __init__(self, time_input):
+        #print  (datetime.strptime(time_input, "%d %b %Y %H:%M:%S"))
+        tz = pytz.timezone("EST")
+        self.time_trigger =  datetime.strptime(time_input, "%d %b %Y %H:%M:%S").replace(tzinfo=tz)
+
+
 # Problem 6
 # TODO: BeforeTrigger and AfterTrigger
 
-class BeforeTrigger(Trigger):
-    pass
+class BeforeTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return self.time_trigger > story.get_pubdate().replace(tzinfo=pytz.timezone("EST"))
 
-class AfterTrigger(Trigger):
-    pass
+
+class AfterTrigger( TimeTrigger):
+    def evaluate(self, story):
+        return self.time_trigger < story.get_pubdate().replace(tzinfo=pytz.timezone("EST"))
+
 
 # COMPOSITE TRIGGERS
 
 # Problem 7
 # TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, Target_Trigger):
+        self.target_trigger = Target_Trigger
 
+    def evaluate(self, story):
+        return not self.target_trigger.evaluate(story)
 # Problem 8
 # TODO: AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self, first_trigger, second_trigger):
+        self.first_trigger = first_trigger
+        self.second_trigger = second_trigger
 
+    def evaluate(self, story):
+        return self.first_trigger.evaluate(story) and self.second_trigger.evaluate(story)
 # Problem 9
 # TODO: OrTrigger
+class OrTrigger(Trigger):
+    def __init__(self, first_trigger, second_trigger):
+        self.first_trigger = first_trigger
+        self.second_trigger = second_trigger
 
+    def evaluate(self, story):
+        return self.first_trigger.evaluate(story) or self.second_trigger.evaluate(story)
 
 #======================
 # Filtering
